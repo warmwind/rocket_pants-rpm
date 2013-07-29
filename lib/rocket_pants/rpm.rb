@@ -1,6 +1,6 @@
 require "rocket_pants/rpm/version"
 require "newrelic_rpm"
-require 'new_relic/agent/instrumentation/rails3/action_controller'
+require 'new_relic/agent/instrumentation/rails4/action_controller'
 
 module RocketPants
   module RPM
@@ -9,7 +9,7 @@ module RocketPants
       @name = :rocketpants_controller
       
       depends_on do
-        defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 3
+        defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 4
       end
 
       depends_on do
@@ -23,7 +23,7 @@ module RocketPants
       executes do
         class RocketPants::Base
           include NewRelic::Agent::Instrumentation::ControllerInstrumentation
-          include NewRelic::Agent::Instrumentation::Rails3::ActionController
+          include NewRelic::Agent::Instrumentation::Rails4::ActionController
         end
       end
     end
